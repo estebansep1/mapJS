@@ -10,6 +10,14 @@ const myMap = {
 		center: this.coordinates,
 		zoom: 11,
 		});
+
+     function updateMapWithCoordinates(newCoords) {
+        myMap.coordinates = newCoords;
+        myMap.map.setView(newCoords, 11);
+        myMap.markers.geolocationMarker.setLatLng(newCoords).openPopup();
+     }
+          
+
 		// add openstreetmap tiles
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution:
