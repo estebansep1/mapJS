@@ -3,7 +3,7 @@
     background-color: #ccc;
 }
 #map::before{
-    content: 'LOADING';
+    content: 'MAP LOADING...';
     font-size: 3em;
     text-align: center;
     width: 100%;
