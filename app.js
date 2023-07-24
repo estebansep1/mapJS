@@ -4,7 +4,7 @@ const myMap = {
 	map: {},
 	markers: {},
 
-	// build leaflet map
+	// BUILD THE MAP
 	buildMap() {
 		this.map = L.map('map', {
 		center: this.coordinates,
@@ -18,13 +18,13 @@ const myMap = {
      }
           
 
-		// add openstreetmap tiles
+		// ADD TILES TO MAP
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution:
 			'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		minZoom: '15',
 		}).addTo(this.map)
-		// create and add geolocation marker
+		// ADD A GEOLOCATION MARKER
 		const marker = L.marker(this.coordinates)
 		marker
 		.addTo(this.map)
@@ -32,7 +32,7 @@ const myMap = {
 		.openPopup()
 	},
 
-	// add business markers
+	// ADD MARKERS FOR BUSINESSES
 	addMarkers() {
 		for (let i = 0; i < this.businesses.length; i++) {
 		this.markers = L.marker([
@@ -45,7 +45,7 @@ const myMap = {
 	},
 }
 
-// get coordinates via geolocation api
+// GET COORDS
 async function getCoords(){
 	const pos = await new Promise((resolve, reject) => {
 		navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -53,8 +53,6 @@ async function getCoords(){
 	return [pos.coords.latitude, pos.coords.longitude]
 }
 
-
-// get foursquare businesses
 async function getFoursquare(business) {
 	const options = {
 		method: 'GET',
@@ -86,15 +84,13 @@ function processBusinesses(data) {
 }
 
 
-// event handlers
-// window load
 window.onload = async () => {
 	const coords = await getCoords()
 	myMap.coordinates = coords
 	myMap.buildMap()
 }
 
-// business submit button
+// SUMBIT BUTTON
 document.getElementById('submit').addEventListener('click', async (event) => {
 	event.preventDefault()
 	let business = document.getElementById('business').value
